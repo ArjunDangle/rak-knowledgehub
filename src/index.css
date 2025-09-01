@@ -2,96 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* RAKwireless Knowledge Hub Design System - Google Classroom Inspired
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
+    /* Google Color Palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 214 14% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 214 14% 15%;
+    --card-hover: 210 17% 97%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 214 14% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Google Blue Primary */
+    --primary: 217 89% 61%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 217 89% 55%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Google Green Secondary */
+    --secondary: 142 71% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 142 71% 40%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Google Yellow Accent */
+    --accent: 45 100% 51%;
+    --accent-foreground: 214 14% 15%;
+    --accent-hover: 45 100% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Google Red for warnings/errors */
+    --destructive: 4 90% 58%;
+    --destructive-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Neutral grays */
+    --muted: 210 17% 97%;
+    --muted-foreground: 213 10% 55%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 213 13% 91%;
+    --input: 213 13% 91%;
+    --ring: 217 89% 61%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Knowledge Hub specific tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(217 89% 61%), hsl(142 71% 45%));
+    --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --card-shadow-hover: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    
+    /* Category colors */
+    --hardware-color: 217 89% 61%;
+    --firmware-color: 142 71% 45%;
+    --support-color: 45 100% 51%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+}
 }
 
 @layer base {
@@ -100,6 +70,71 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .knowledge-card {
+    @apply bg-card border border-border rounded-xl p-6 transition-all duration-200;
+    box-shadow: var(--card-shadow);
+  }
+
+  .knowledge-card:hover {
+    @apply bg-card-hover;
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-1px);
+  }
+
+  .category-hardware {
+    @apply bg-blue-50 border-blue-200 text-blue-900;
+  }
+
+  .category-firmware {
+    @apply bg-green-50 border-green-200 text-green-900;
+  }
+
+  .category-support {
+    @apply bg-yellow-50 border-yellow-200 text-yellow-900;
+  }
+
+  .hero-gradient {
+    background: var(--hero-gradient);
+  }
+
+  .prose-knowledge {
+    @apply prose prose-lg max-w-none;
+  }
+
+  .prose-knowledge h1 {
+    @apply text-3xl font-bold text-primary mb-4;
+  }
+
+  .prose-knowledge h2 {
+    @apply text-2xl font-semibold text-foreground mt-8 mb-4;
+  }
+
+  .prose-knowledge h3 {
+    @apply text-xl font-semibold text-foreground mt-6 mb-3;
+  }
+
+  .prose-knowledge p {
+    @apply text-muted-foreground leading-relaxed mb-4;
+  }
+
+  .prose-knowledge ul, .prose-knowledge ol {
+    @apply text-muted-foreground mb-4;
+  }
+
+  .prose-knowledge code {
+    @apply bg-muted px-2 py-1 rounded text-sm font-mono;
+  }
+
+  .prose-knowledge pre {
+    @apply bg-muted p-4 rounded-lg overflow-x-auto;
   }
 }
